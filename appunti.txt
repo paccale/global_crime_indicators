@@ -41,3 +41,20 @@ RMSE = 0.801 sul test → Penalizza di più gli errori grandi
 
 RMSE > MAE significa che ci sono alcuni outliers mal predetti
 Ma la differenza è contenuta (0.801 vs 0.645)
+
+
+
+
+
+
+Index(['country', 'continent', 'school_enrollment_secondary_gross_wdi',
+       'trade_of_gdp_wdi', 'inflation_consumer_prices_annual_wdi',
+       'unemployment_total_of_total_wdi', 'unemployment_youth_total_of_wdi',
+       'gdp_growth_annual_wdi', 'gdp_per_capita_current_wdi',
+       'government_effectiveness_estimate_wdi',
+       'control_of_corruption_estimate_wdi', 'regulatory_quality_estimate_wdi',
+       'population_total_wdi', 'population_ages_1564_of_wdi',
+       'political_stability_and_absence_wdi', 'life_expectancy_at_birth_wdi',
+       'rule_of_law_estimate_wdi', 'urban_population_of_total_wdi',
+       'voice_and_accountability_estimate_wdi', 'criminality_oc'],
+      dtype='object')
