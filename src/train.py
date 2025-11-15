@@ -1,8 +1,10 @@
+import os
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.ensemble import RandomForestRegressor
 
-SAVE_MODEL = True
+
 
 from data_preprocessing import (
     load_data, align_wdi_countries_names, select_wdi_indicators, 
@@ -10,13 +12,14 @@ from data_preprocessing import (
     merge_datasets, get_scaler, scale_features,
     get_vectorizer, vectorize_df
 )
-
 from config import (
     RF_PARAMS, DATA_DIR, MODEL_DIR,
     WDI_2021_PATH, OC_2021_PATH,
     WDI_2023_PATH, OC_2023_PATH,
     RANDOM_STATE
                     )
+
+SAVE_MODEL = True
 
 def prepare_data():
     
@@ -70,8 +73,12 @@ def train_model(params = RF_PARAMS):
     
     rf_model.fit(X_train,  y_train)
     print(f"Model trained successfully!")
-    y_pred = 
     
+    if SAVE_MODEL:
+        os.makedirs(MODEL_DIR, exist_ok=True)
+        filename = f'{MODEL_DIR}/RandomForest.pkl'
+        pickle.dump(rf_model, open(filename, 'wb'))
+        
 
 if __name__ == "__main__":
     train_model()
