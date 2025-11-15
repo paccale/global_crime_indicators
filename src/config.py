@@ -48,6 +48,7 @@ COUNTRY_NAME_MAPPING_WDI_TO_OC = {
     'Congo, Rep,': 'Congo, Rep.',
 }
 
+# These indicators have been selected after the EDA studio on notebook
 WDI_INDICATORS = [[
         'NY.GDP.PCAP.CD',           # GDP per capita (current US$) X
         'NY.GDP.MKTP.KD.ZG',        # GDP growth (annual %) X
@@ -289,7 +290,7 @@ RANDOM_STATE = 42
 TEST_SIZE =0.2
 
 # Target Column
-TARGET_COLUMN = 'criminality_avg_oc'
+TARGET_COLUMN = 'criminality_oc'
 
 # Columns to drop
 DROP_COLUMNS = ['country', TARGET_COLUMN]

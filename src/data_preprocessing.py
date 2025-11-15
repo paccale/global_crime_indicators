@@ -3,10 +3,13 @@ Data Preprocessing pipeline for Crime Prediction
 """
 
 import pandas as pd
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.preprocessing import StandardScaler
 
-from src.config import COUNTRY_NAME_MAPPING_WDI_TO_OC, WDI_INDICATORS, COUNTRY_TO_CONTINENT_MAPPING, MISSING_SUMMARY
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+from src.config import (COUNTRY_NAME_MAPPING_WDI_TO_OC, WDI_INDICATORS, 
+                        COUNTRY_TO_CONTINENT_MAPPING, MISSING_SUMMARY, 
+                        TARGET_COLUMN)
 
 def load_data(wdi_path: str, oc_path: str, year_used: int) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
@@ -142,6 +145,60 @@ def rename_columns(df: pd.DataFrame, col: str, suffix: str, remove_punctuation: 
         columns.append(col)
     return columns
 
-df_oc.columns = [modify_name_cols(c, suffix='_oc', keep_4_words=False, ) for c in df_oc.columns]
-df_wdi_clean.columns = [modify_name_cols(c, suffix='_wdi' ) for c in df_wdi_clean.columns]
-del df_oc['index_oc']
+# df_oc.columns = [modify_name_cols(c, suffix='_oc', keep_4_words=False, ) for c in df_oc.columns]
+# df_wdi_clean.columns = [modify_name_cols(c, suffix='_wdi' ) for c in df_wdi_clean.columns]
+# del df_oc['index_oc']
+
+def merge_datasets(df_wdi_clean:  pd.DataFrame, df_oc: pd.DataFrame) -> pd.DataFrame:
+    """
+    Merge the datasets and remove OC columns except target
+
+    Args:
+        df_wdi_clean (pd.DataFrame): _description_
+        df_oc (pd.DataFrame): _description_
+
+    Returns:
+        pd.DataFrame: _description_
+    """
+    df_merged =  df_wdi_clean.merge(df_oc, left_on='country_standardized_wdi', right_on = 'country_oc', how='left', validate='one_to_one')
+    
+    # remove not necessary columns
+    del df_merged['country_oc']
+    del df_merged['continent_oc']
+    del df_merged['region_oc']
+    
+    # rename column
+    df_merged = df_merged.rename(columns={'country_standardized_wdi': 'country', 'continent_wdi':'continent'})
+    
+    # drop OC columns except target, we work with WDI data
+    oc_cols_to_drop = [col for col in df_merged.columns if col.endswith('_oc') and col != TARGET_COLUMN]
+    df_merged = df_merged.drop(columns=oc_cols_to_drop)
+    return df_merged
+
+
+def get_scaler(X_train: pd.DataFrame) -> StandardScaler:
+    """
+    Fit and return StandardScaler on training data
+
+    Args:
+        X_train (pd.DataFrame): Training features
+
+    Returns:
+        StandardScaler: Fitted Scaler
+    """
+    scaler = StandardScaler()
+    scaler.fit(X_train)
+    return scaler
+
+def scale_features(X: pd.DataFrame, scaler: StandardScaler, ) -> np.ndarray:
+    """
+    Scale Features using fittest scaler 
+
+    Args:
+        X (pd.DataFrame): features to scale
+        scaler (StandardScaler): fitted std scaler
+
+    Returns:
+        np.ndarray: Scaled features
+    """
+    return scaler.transform(X)
