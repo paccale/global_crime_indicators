@@ -5,9 +5,11 @@ Data Preprocessing pipeline for Crime Prediction
 import pandas as pd
 
 from sklearn.preprocessing import StandardScaler
+from sklearn.feature_extraction import DictVectorizer
+
 import numpy as np
 
-from src.config import (COUNTRY_NAME_MAPPING_WDI_TO_OC, WDI_INDICATORS, 
+from config import (COUNTRY_NAME_MAPPING_WDI_TO_OC, WDI_INDICATORS, 
                         COUNTRY_TO_CONTINENT_MAPPING, MISSING_SUMMARY, 
                         TARGET_COLUMN)
 
@@ -76,10 +78,10 @@ def add_continents_to_wdi(df_wdi_filtered: pd.DataFrame, country_to_continent: d
     col = 'continent'
     df_wdi_filtered= df_wdi_filtered[[col] + [c for c in df_wdi_filtered.columns if c != col]] 
     df_wdi_with_continents = df_wdi_filtered.copy()
-    return
+    return df_wdi_with_continents
 
 def handling_wdi_missing_values(df_wdi_with_continents: pd.DataFrame, missing_indexes: list= MISSING_SUMMARY):
-    if df_wdi_with_continents.isnull().sum() >0:
+    if df_wdi_with_continents.isnull().sum().sum() >0:
         for col in missing_indexes:
             # Fill null for each continent
             for continent in df_wdi_with_continents['continent'].unique():
@@ -91,19 +93,19 @@ def handling_wdi_missing_values(df_wdi_with_continents: pd.DataFrame, missing_in
                 missing_in_continent = df_wdi_with_continents.loc[continent_mask, col].isnull().sum()
                 
                 if missing_in_continent > 0:
-                    # compute continent mead
+                    # compute continent mean
                     continent_mean = df_wdi_with_continents.loc[continent_mask, col].mean()
                     
                     # If all the countries of a continent are missing, use global mean
                     if pd.isnull(continent_mean):
                         continent_mean = df_wdi_with_continents[col].mean()
-                        print(f"    {continent:20s}: {missing_in_continent:2d} missing → Global mean = {continent_mean:.2f}")
+                        # print(f"    {continent:20s}: {missing_in_continent:2d} missing → Global mean = {continent_mean:.2f}")
                     else:
-                        print(f"    {continent:20s}: {missing_in_continent:2d} missing → Continent mean = {continent_mean:.2f}")
-                    
-                    # fillna in the df
-                    df_wdi_with_continents.loc[continent_mask, col] = df_wdi_with_continents.loc[continent_mask, col].fillna(continent_mean)
-                    
+                        # print(f"    {continent:20s}: {missing_in_continent:2d} missing → Continent mean = {continent_mean:.2f}")
+                        # fillna in the df
+                        df_wdi_with_continents.loc[continent_mask, col] = df_wdi_with_continents.loc[continent_mask, col].fillna(continent_mean)
+            
+            # print(df_wdi_with_continents)
             # verify no more missing values
             remaining = df_wdi_with_continents[col].isnull().sum()            
             if remaining > 0:
@@ -111,17 +113,17 @@ def handling_wdi_missing_values(df_wdi_with_continents: pd.DataFrame, missing_in
                 global_mean = df_wdi_with_continents[col].mean()
                 df_wdi_with_continents[col].fillna(global_mean, inplace=True)        
                 
-            # final verify
-            total_missing_after = df_wdi_with_continents[missing_indexes.index].isnull().sum().sum()
-            assert total_missing_after == 0, f"STILL {total_missing_after} MISSING!!"
-            print(f"Sustitution completed: 0 missing values")
+        print(f"{int(df_wdi_with_continents.isnull().sum().sum())} missing values")
+        df_wdi_with_continents = df_wdi_with_continents.reset_index()
+        return df_wdi_with_continents
     else:
-        print(f"Sustitution completed: 0 missing values")
+        print(f"No missing Values found")
         df_wdi_no_null_values = df_wdi_with_continents.copy()
+        df_wdi_no_null_values = df_wdi_no_null_values.reset_index()
         return df_wdi_no_null_values
             
             
-def rename_columns(df: pd.DataFrame, col: str, suffix: str, remove_punctuation: bool=True, no_white_spaces: bool = True, keep_4_words: bool = True, add_suffix: bool = True ) -> list[str]:
+def rename_columns(df: pd.DataFrame, suffix: str, remove_punctuation: bool=True, no_white_spaces: bool = True, keep_4_words: bool = True, add_suffix: bool = True ) -> pd.DataFrame:
     import re
     columns = []
     for col in df.columns:
@@ -143,7 +145,8 @@ def rename_columns(df: pd.DataFrame, col: str, suffix: str, remove_punctuation: 
         # final clean
         col = re.sub(r"_+", "_", col).strip("_").lower()
         columns.append(col)
-    return columns
+    df.columns = columns
+    return df
 
 # df_oc.columns = [modify_name_cols(c, suffix='_oc', keep_4_words=False, ) for c in df_oc.columns]
 # df_wdi_clean.columns = [modify_name_cols(c, suffix='_wdi' ) for c in df_wdi_clean.columns]
@@ -190,6 +193,7 @@ def get_scaler(X_train: pd.DataFrame) -> StandardScaler:
     scaler.fit(X_train)
     return scaler
 
+
 def scale_features(X: pd.DataFrame, scaler: StandardScaler, ) -> np.ndarray:
     """
     Scale Features using fittest scaler 
@@ -202,3 +206,17 @@ def scale_features(X: pd.DataFrame, scaler: StandardScaler, ) -> np.ndarray:
         np.ndarray: Scaled features
     """
     return scaler.transform(X)
+
+
+def get_vectorizer(X_train: pd.DataFrame) -> DictVectorizer:
+    dv = DictVectorizer(sparse=False)
+    train_dict = X_train.to_dict(orient='records')
+    dv.fit(train_dict)
+    return dv
+
+
+def vectorize_df(X: pd.DataFrame, dv: DictVectorizer):
+    x_dict = X.to_dict(orient='records')
+    X_vectorized = dv.transform(x_dict)
+    return X_vectorized
+

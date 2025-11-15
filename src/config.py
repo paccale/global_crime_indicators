@@ -49,38 +49,39 @@ COUNTRY_NAME_MAPPING_WDI_TO_OC = {
 }
 
 # These indicators have been selected after the EDA studio on notebook
-WDI_INDICATORS = [[
+WDI_INDICATORS = [
         'NY.GDP.PCAP.CD',           # GDP per capita (current US$) X
         'NY.GDP.MKTP.KD.ZG',        # GDP growth (annual %) X
         'SL.UEM.TOTL.ZS',           # Unemployment, total (% of labor force) X
         'SL.UEM.1524.ZS',           # Youth unemployment (ages 15-24, %) X
         'FP.CPI.TOTL.ZG',           # Inflation, consumer prices (annual %) X
         'NE.TRD.GNFS.ZS',           # Trade (% of GDP) X
-    ],
+    
 
     # Low education and school dropout could push to get involved in crime
-    [
+    
         'SE.SEC.ENRR',              # School enrollment, secondary (% gross) X
-    ],
+    
 
     # Weak healtcare systems can create illegal market for drug/organs. Or large young population could indicate more potential recruits
-    [
+    
         'SP.DYN.LE00.IN',           # Life expectancy at birth (years) X
         'SP.POP.TOTL',              # Population, total X
         'SP.URB.TOTL.IN.ZS',        # Urban population (% of total) X
         'SP.POP.1564.TO.ZS',        # Population ages 15-64 (% of total) - working age X
-    ],
+    
 
     # These could be the most important, indicating high corruption, weak rule of law or politic instability: each one is a determinant factor in the proliferation of organized crime 
-    [
+    
         'CC.EST',                   # Control of Corruption (estimate) X
         'GE.EST',                   # Government Effectiveness (estimate) X
         'PV.EST',                   # Political Stability and Absence of Violence (estimate) X
         'RL.EST',                   # Rule of Law (estimate) X
         'RQ.EST',                   # Regulatory Quality (estimate) X
         'VA.EST',                   # Voice and Accountability (estimate) X
-    ],
+    
     ]
+
 
 COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Libya': 'Africa',
@@ -97,7 +98,7 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Turkmenistan': 'Asia',
     'Equatorial Guinea': 'Africa',
     'Eritrea': 'Africa',
-    'Congo, Dem, Rep,': 'Africa',
+    'Congo, Dem. Rep.': 'Africa',
     'Mali': 'Africa',
     'Comoros': 'Africa',
     'Chad': 'Africa',
@@ -116,11 +117,11 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Belarus': 'Europe',
     'Liberia': 'Africa',
     'Gabon': 'Africa',
-    'Congo, Rep,': 'Africa',
+    'Congo, Rep.': 'Africa',
     'Mozambique': 'Africa',
     'Papua New Guinea': 'Oceania',
     'Belize': 'Americas',
-    'eSwatini': 'Africa',
+    'Eswatini': 'Africa',
     'Madagascar': 'Africa',
     'Turkey': 'Asia',
     'Paraguay': 'Americas',
@@ -183,7 +184,7 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Brazil': 'Americas',
     'Sao Tome and Principe': 'Africa',
     'Serbia': 'Europe',
-    'St, Kitts and Nevis': 'Americas',
+    'St. Kitts and Nevis': 'Americas',
     'Nauru': 'Oceania',
     'Solomon Islands': 'Oceania',
     'United Arab Emirates': 'Asia',
@@ -208,7 +209,7 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Trinidad and Tobago': 'Americas',
     'Palau': 'Oceania',
     'Cuba': 'Americas',
-    'St, Vincent and the Grenadines': 'Americas',
+    'St. Vincent and the Grenadines': 'Americas',
     'Jamaica': 'Americas',
     'India': 'Asia',
     'Qatar': 'Asia',
@@ -221,7 +222,7 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'Mauritius': 'Africa',
     'Rwanda': 'Africa',
     'Jordan': 'Asia',
-    'St, Lucia': 'Americas',
+    'St. Lucia': 'Americas',
     'Colombia': 'Americas',
     'South Africa': 'Africa',
     'Costa Rica': 'Americas',
@@ -270,11 +271,13 @@ COUNTRY_TO_CONTINENT_MAPPING = {'Afghanistan': 'Asia',
     'New Zealand': 'Oceania',
     'Norway': 'Europe',
     'Andorra': 'Europe',
-    'Korea, Rep,': 'Asia',
+    'Korea, Rep.': 'Asia',
     'Denmark': 'Europe',
     'Iceland': 'Europe',
     'Liechtenstein': 'Europe',
     'Finland': 'Europe'}
+
+
 
 MISSING_SUMMARY = ['School enrollment, secondary (% gross)',
  'Trade (% of GDP)',
@@ -294,3 +297,12 @@ TARGET_COLUMN = 'criminality_oc'
 
 # Columns to drop
 DROP_COLUMNS = ['country', TARGET_COLUMN]
+
+# Random forest Params (obtained through GridSearch)
+RF_PARAMS =  {
+    'max_depth': 15, 
+    'max_features': None, 
+    'min_samples_leaf': 1, 
+    'min_samples_split': 2, 
+    'n_estimators': 300
+    }
