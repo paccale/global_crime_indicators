@@ -56,14 +56,14 @@ def prepare_data():
     X_test = vectorize_df(X_test, dv=dv)
     X_test = scale_features(X=X_test, scaler=scaler)
 
-    
-    return X_full_train, y_full_train, X_test, y_test
+        
+    return X_full_train, y_full_train, X_test, y_test, dv, scaler
                                        
     
     
     
 def train_model(params = RF_PARAMS):
-    X_train, y_train, X_test, y_test = prepare_data()
+    X_train, y_train, X_test, y_test, dv, scaler = prepare_data()
     print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
     rf_model = RandomForestRegressor(
         **params, 
@@ -78,6 +78,12 @@ def train_model(params = RF_PARAMS):
         os.makedirs(MODEL_DIR, exist_ok=True)
         filename = f'{MODEL_DIR}/RandomForest.pkl'
         pickle.dump(rf_model, open(filename, 'wb'))
+        print(f"Model Saved in {filename}")
+        filename = f'{MODEL_DIR}/dict_vectorizer.pkl'
+        pickle.dump(dv, open(filename, 'wb'))
+        filename = f'{MODEL_DIR}/scaler.pkl'
+        pickle.dump(scaler, open(filename, 'wb'))
+    
         
 
 if __name__ == "__main__":
