@@ -26,7 +26,7 @@ class CrimePredictionModel:
             scaler_path = f'{MODEL_DIR}/scaler.pkl'
             with open(scaler_path, 'rb') as f:
                 self.scaler = pickle.load(f)
-            print(f"Scaler loaded from {vectorizer_path}")
+            print(f"Scaler loaded from {scaler_path}")
             
             
         except FileNotFoundError as e:
@@ -37,7 +37,7 @@ class CrimePredictionModel:
         
     
     def preprocess_input(self, input_data: dict) -> pd.DataFrame:
-        df = pd.DataFrame([input_data])
+        # X = pd.DataFrame([input_data])
         
         X = self.vectorizer.transform([input_data])
         
@@ -68,35 +68,37 @@ def predict_single(input_data: dict) -> float:
     Returns:
         float: predicted criminality score
     """
+    model = CrimePredictionModel()
+    return model.predict(input_data)
     
     
 if __name__ == "__main__":
     print("Tesing crime model")
     test_input = {
-    'continent': 'Asia',
-    'school_enrollment_secondary_gross_wdi': 85.96,
-    'trade_of_gdp_wdi': 67.58,
-    'inflation_consumer_prices_annual_wdi': -4.64,
-    'unemployment_total_of_total_wdi': 13.99,
-    'unemployment_youth_total_of_wdi': 17.29,
-    'gdp_per_capita_current_wdi': 413.76,
-    'gdp_growth_annual_wdi': 2.27,
-    'government_effectiveness_estimate_wdi': -1.99,
-    'control_of_corruption_estimate_wdi': -1.15,
-    'regulatory_quality_estimate_wdi': -1.27,
-    'population_total_wdi': 41454761.0,
-    'population_ages_1564_of_wdi': 54.40,
-    'political_stability_and_absence_wdi': -2.48,
-    'life_expectancy_at_birth_wdi': 66.04,
-    'rule_of_law_estimate_wdi': -1.65,
-    'urban_population_of_total_wdi': 26.93,
-    'voice_and_accountability_estimate_wdi': -1.85
+ 'continent': 'Americas',
+ 'school_enrollment_secondary_gross_wdi': 83.62,
+ 'trade_of_gdp_wdi': 106.53,
+ 'inflation_consumer_prices_annual_wdi': 4.39,
+ 'unemployment_total_of_total_wdi': 8.27,
+ 'unemployment_youth_total_of_wdi': 18.77,
+ 'gdp_per_capita_current_wdi': 7460.0,
+ 'gdp_growth_annual_wdi': 1.15,
+ 'government_effectiveness_estimate_wdi': -0.38,
+ 'control_of_corruption_estimate_wdi': -0.23,
+ 'regulatory_quality_estimate_wdi': -0.43,
+ 'population_total_wdi': 411106.0,
+ 'population_ages_1564_of_wdi': 68.17,
+ 'political_stability_and_absence_wdi': 0.59,
+ 'life_expectancy_at_birth_wdi': 73.57,
+ 'rule_of_law_estimate_wdi': -0.64,
+ 'urban_population_of_total_wdi': 46.61,
+ 'voice_and_accountability_estimate_wdi': 0.54,
     }
     
-    # try: 
-    model = CrimePredictionModel()
-    prediction = model.predict(test_input)
-    print(f"Predicted Criminality score: {predict_single}")
-    print(f"Expedcted valuer around 7.1")
-    # except Exception as e:
-    #     print(f"\n Prediction failed: {e}")
+    try: 
+        model = CrimePredictionModel()
+        prediction = model.predict(test_input)
+        print(f"Predicted Criminality score: {prediction:.2f}")
+        print(f"Expedcted value around 4.87")
+    except Exception as e:
+        print(f"\n Prediction failed: {e}")

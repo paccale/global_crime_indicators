@@ -1,0 +1,193 @@
+{'Afghanistan': 7.1}
+{'Albania': 5.17}
+{'Algeria': 4.88}
+{'Andorra': 3.22}
+{'Angola': 5.58}
+{'Antigua and Barbuda': 2.98}
+{'Argentina': 5.0}
+{'Armenia': 2.82}
+{'Australia': 4.0}
+{'Austria': 4.13}
+{'Azerbaijan': 4.8}
+{'Bahamas': 3.75}
+{'Bahrain': 4.95}
+{'Bangladesh': 5.12}
+{'Barbados': 3.07}
+{'Belarus': 5.87}
+{'Belgium': 4.43}
+{'Belize': 4.87}
+{'Benin': 5.32}
+{'Bhutan': 3.9}
+{'Bolivia': 4.95}
+{'Bosnia and Herzegovina': 5.85}
+{'Botswana': 4.35}
+{'Brazil': 6.77}
+{'Brunei': 2.85}
+{'Bulgaria': 5.65}
+{'Burkina Faso': 5.92}
+{'Burundi': 4.87}
+{'Cabo Verde': 4.28}
+{'Cambodia': 6.85}
+{'Cameroon': 6.27}
+{'Canada': 3.88}
+{'Central African Republic': 6.75}
+{'Chad': 5.5}
+{'Chile': 5.18}
+{'China': 6.37}
+{'Colombia': 7.75}
+{'Comoros': 3.92}
+{'Congo, Dem, Rep,': 7.35}
+{'Congo, Rep,': 4.78}
+{'Costa Rica': 5.53}
+{'Croatia': 5.15}
+{'Cuba': 3.37}
+{'Cyprus': 4.43}
+{'Czech Republic': 4.68}
+{"Côte d'Ivoire": 6.02}
+{'Denmark': 4.02}
+{'Djibouti': 4.65}
+{'Dominica': 2.63}
+{'Dominican Republic': 5.02}
+{'Ecuador': 7.07}
+{'Egypt': 5.05}
+{'El Salvador': 5.92}
+{'Equatorial Guinea': 4.38}
+{'Eritrea': 3.97}
+{'Estonia': 4.25}
+{'Ethiopia': 5.68}
+{'Fiji': 4.15}
+{'Finland': 2.98}
+{'France': 5.82}
+{'Gabon': 4.85}
+{'Gambia': 4.53}
+{'Georgia': 3.6}
+{'Germany': 5.33}
+{'Ghana': 5.8}
+{'Greece': 5.35}
+{'Grenada': 2.93}
+{'Guatemala': 6.6}
+{'Guinea': 4.58}
+{'Guinea-Bissau': 5.1}
+{'Guyana': 5.97}
+{'Haiti': 5.93}
+{'Honduras': 7.05}
+{'Hungary': 4.62}
+{'Iceland': 3.37}
+{'India': 5.75}
+{'Indonesia': 6.85}
+{'Iran': 7.03}
+{'Iraq': 7.13}
+{'Ireland': 5.08}
+{'Israel': 4.85}
+{'Italy': 6.22}
+{'Jamaica': 5.8}
+{'Japan': 4.28}
+{'Jordan': 4.93}
+{'Kazakhstan': 4.47}
+{'Kenya': 7.02}
+{'Kiribati': 2.45}
+{'Korea, DPR': 4.82}
+{'Korea, Rep,': 4.43}
+{'Kuwait': 5.2}
+{'Kyrgyzstan': 5.32}
+{'Laos': 6.12}
+{'Latvia': 3.9}
+{'Lebanon': 7.1}
+{'Lesotho': 3.92}
+{'Liberia': 5.5}
+{'Libya': 6.93}
+{'Liechtenstein': 2.27}
+{'Lithuania': 3.9}
+{'Luxembourg': 2.85}
+{'Madagascar': 5.58}
+{'Malawi': 4.48}
+{'Malaysia': 6.23}
+{'Maldives': 4.27}
+{'Mali': 5.93}
+{'Malta': 5.0}
+{'Marshall Islands': 2.52}
+{'Mauritania': 4.38}
+{'Mauritius': 4.37}
+{'Mexico': 7.57}
+{'Micronesia (Federated States of)': 3.0}
+{'Moldova': 5.6}
+{'Monaco': 2.58}
+{'Mongolia': 4.12}
+{'Montenegro': 5.9}
+{'Morocco': 4.8}
+{'Mozambique': 6.2}
+{'Myanmar': 8.15}
+{'Namibia': 4.3}
+{'Nauru': 2.05}
+{'Nepal': 6.57}
+{'Netherlands': 4.97}
+{'New Zealand': 4.08}
+{'Nicaragua': 5.72}
+{'Niger': 5.7}
+{'Nigeria': 7.28}
+{'North Macedonia': 5.03}
+{'Norway': 3.75}
+{'Oman': 4.4}
+{'Pakistan': 6.03}
+{'Palau': 2.7}
+{'Panama': 6.98}
+{'Papua New Guinea': 5.72}
+{'Paraguay': 7.52}
+{'Peru': 6.4}
+{'Philippines': 6.63}
+{'Poland': 4.48}
+{'Portugal': 4.88}
+{'Qatar': 5.45}
+{'Romania': 4.58}
+{'Russia': 6.87}
+{'Rwanda': 3.6}
+{'Samoa': 2.43}
+{'San Marino': 3.48}
+{'Sao Tome and Principe': 1.7}
+{'Saudi Arabia': 6.23}
+{'Senegal': 5.52}
+{'Serbia': 6.22}
+{'Seychelles': 3.9}
+{'Sierra Leone': 4.95}
+{'Singapore': 3.47}
+{'Slovakia': 4.72}
+{'Slovenia': 4.37}
+{'Solomon Islands': 4.4}
+{'Somalia': 6.13}
+{'South Africa': 7.18}
+{'South Sudan': 6.32}
+{'Spain': 5.9}
+{'Sri Lanka': 4.92}
+{'St, Kitts and Nevis': 3.52}
+{'St, Lucia': 3.53}
+{'St, Vincent and the Grenadines': 3.08}
+{'Sudan': 6.37}
+{'Suriname': 4.77}
+{'Sweden': 4.7}
+{'Switzerland': 4.87}
+{'Syria': 7.07}
+{'Tajikistan': 5.45}
+{'Tanzania': 6.2}
+{'Thailand': 6.18}
+{'Timor-Leste': 4.08}
+{'Togo': 5.23}
+{'Tonga': 3.7}
+{'Trinidad and Tobago': 5.2}
+{'Tunisia': 4.45}
+{'Turkey': 7.03}
+{'Turkmenistan': 4.4}
+{'Tuvalu': 1.62}
+{'Uganda': 6.55}
+{'Ukraine': 6.48}
+{'United Arab Emirates': 6.37}
+{'United Kingdom': 5.75}
+{'United States': 5.67}
+{'Uruguay': 3.22}
+{'Uzbekistan': 4.95}
+{'Vanuatu': 2.43}
+{'Venezuela': 6.72}
+{'Vietnam': 6.55}
+{'Yemen': 6.57}
+{'Zambia': 4.73}
+{'Zimbabwe': 5.47}
+{'eSwatini': 4.38}

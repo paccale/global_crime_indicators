@@ -68,7 +68,7 @@ def select_wdi_indicators(df_wdi_correct_countries: pd.DataFrame,year_used, indi
     col = "Country_standardized"
     cols = [col] + [c for c in df_wdi_filtered.columns if c != col]
     df_wdi_filtered = df_wdi_filtered[cols]
-    
+    print(df_wdi_filtered.columns)
     df_wdi_filtered = df_wdi_filtered.pivot(index = 'Country_standardized', columns = 'Indicator Name', values = f'{str(year_used)}')
     return df_wdi_filtered
 
