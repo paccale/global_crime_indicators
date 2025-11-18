@@ -201,10 +201,56 @@ This creates model artifacts in `Data/models/`:
 5. **Start the Flask service**
 
 ```bash
-python app.py
+python src/serve.py
 ```
 
 Service runs on `http://localhost:5000`
+
+After starting the server, you can run the script in tests: test_predict.py. 
+When asked, insert the name of the country you want to make prediction.
+
+```bash
+python tests/test_predict.py
+============================================================
+CRIME PREDICTION WEB SERVICE - TEST SUITE
+============================================================
+
+=== Testing /ping endpoint ===
+Status Code: 200
+Response: {
+  "message": "Crime Prediction Service is running",
+  "status": "ok"
+}
+
+=== Testing /predict endpoint ===
+Insert the country for which you want to predict the Crime Index: Greece
+Sending request with Afghanistan 2023 data...
+Status Code: 200
+Response: {
+  "criminality_score": 4.89,
+  "status": "success"
+}
+
+=== Testing /model_info endpoint ===
+Status Code: 200
+Response: {
+  "features": "[22 features]",
+  "model_type": "RandomForestRegressor",
+  "n_features": 22,
+  "status": "success"
+}
+
+============================================================
+TEST SUMMARY
+============================================================
+Health Check............................ ✓ PASSED
+Prediction.............................. ✓ PASSED
+Model Info.............................. ✓ PASSED
+============================================================
+```
+
+I have created two useful files for testing in the same test folder: countries_for_testing.txt and scores_for_testing.txt.  
+The first contains all the features for each state, which you can copy into a curl request. The second contains all the states and their actual crime indices (both files refer to data from 2023).
 
 ## Docker Deployment
 
