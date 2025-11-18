@@ -343,8 +343,6 @@ curl -X POST http://localhost:5000/predict \
 
 ### Example Test Cases
 
-**Low criminality country (Belgium-like profile)**:
-
 ```bash
 curl -X POST http://localhost:5000/predict \
   -H "Content-Type: application/json" \
@@ -368,9 +366,29 @@ curl -X POST http://localhost:5000/predict \
     "urban_population_of_total_wdi": 98.0,
     "voice_and_accountability_estimate_wdi": 1.4
   }'
-```
 
-Expected criminality score: **~2.5** (low crime)
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+  "continent": "Oceania", 
+  "school_enrollment_secondary_gross_wdi": 134.099243164062, 
+  "trade_of_gdp_wdi": 49.225184059438064, 
+  "inflation_consumer_prices_annual_wdi": 5.597014925373134, 
+  "unemployment_total_of_total_wdi": 3.668, 
+  "unemployment_youth_total_of_wdi": 8.375, 
+  "gdp_per_capita_current_wdi": 64835.9199754535, 
+  "gdp_growth_annual_wdi": 3.4419922000902545, 
+  "government_effectiveness_estimate_wdi": 1.58987963199615, 
+  "control_of_corruption_estimate_wdi": 1.78120493888855, 
+  "regulatory_quality_estimate_wdi": 1.94220554828644, 
+  "population_total_wdi": 26652777.0, 
+  "population_ages_1564_of_wdi": 64.5856920862796, 
+  "political_stability_and_absence_wdi": 0.91705721616745, 
+  "life_expectancy_at_birth_wdi": 83.05121951219513, 
+  "rule_of_law_estimate_wdi": 1.52318394184113, 
+  "urban_population_of_total_wdi": 86.617, 
+  "voice_and_accountability_estimate_wdi": 1.50660192966461}'
+```
 
 ## Model Performance Summary
 
