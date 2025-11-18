@@ -24,7 +24,7 @@ def test_predict():
     """Test single prediction endpoint"""
     print("\n=== Testing /predict endpoint ===")
     records = []
-    with open("countries_for_testing.txt") as f:
+    with open("tests/countries_for_testing.txt") as f:
         for line in f:
             d = ast.literal_eval(line.strip())     # converte stringa → dict
             # flattiamo il dizionario: {"Belize": {...}} → {"country": "Belize", ...}
