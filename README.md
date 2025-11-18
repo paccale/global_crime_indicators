@@ -527,4 +527,4 @@ This project is for educational purposes. Data sources (World Bank, Global Organ
 ---
 
 **Author**: Pasquale Candita
-**Project Year**: 2025  
+
