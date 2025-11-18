@@ -252,6 +252,9 @@ Model Info.............................. ✓ PASSED
 I have created two useful files for testing in the same test folder: countries_for_testing.txt and scores_for_testing.txt.  
 The first contains all the features for each state, which you can copy into a curl request. The second contains all the states and their actual crime indices (both files refer to data from 2023).
 
+You can also simply make the classic curl request that you can find in section API Usage of this readme
+
+
 ## Docker Deployment
 
 ### Build the Docker image
