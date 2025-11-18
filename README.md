@@ -24,7 +24,7 @@ The project combines two authoritative data sources:
 ### 2. World Development Indicators (WDI)
 
 - **Source**: [World Bank Open Data](https://databank.worldbank.org/)
-- **Download**: [WDI Database](https://datatopics.worldbank.org/)
+- **Download**: [WDI Database](https://www.kaggle.com/datasets/theworldbank/world-development-indicators?select=wdi-csv-zip-57-mb-)
 - **Content**: 18 carefully selected socio-economic indicators:
   - **Economic**: GDP per capita, GDP growth, unemployment rates, inflation, trade
   - **Education**: Secondary school enrollment
@@ -33,7 +33,9 @@ The project combines two authoritative data sources:
 
 **Dataset characteristics**:
 
-- Training: 193 countries (2021 data)
+I used the 2021 Dataset during the training phase (so for training and validation), while, for testing, the 2023 Dataset.
+
+- Training and Validation: 193 countries (2021 data)
 - Testing: 193 countries (2023 data)
 - Features: 18 numerical + 1 categorical (continent)
 - No target leakage: predictions based solely on socio-economic factors
@@ -42,63 +44,50 @@ The project combines two authoritative data sources:
 
 Key findings from the EDA (see `notebook.ipynb` for detailed analysis):
 
-1. **Missing Values**: Handled through forward-fill and median imputation strategies
+1. **Missing Values**: managed through this strategy: replacing the missing data for a country with the average data for countries on the same continent as that country. I thought this would be a more realistic replacement.  
+
 2. **Strong Predictors Identified**:
-   - Government effectiveness (correlation: -0.72)
-   - Rule of law (correlation: -0.71)
-   - Control of corruption (correlation: -0.70)
-   - Political stability (correlation: -0.58)
+   - Government effectiveness
+   - Rule of law
+   - Control of corruption
+   - Political stability
 
-3. **Regional Patterns**: Clear differences in crime levels across continents, with governance quality being the strongest differentiator
-
-4. **Feature Engineering**:
+3. **Feature Engineering**:
    - Added continent information as categorical feature
    - Normalized country names between datasets
    - Selected 18 most relevant WDI indicators
 
 ## Model Development
 
-### Baseline Model
+Different models have been trained and compared.
 
-- **Linear Regression**: MAE = 0.592, R² = 0.863 (2023 test set)
+1. **Linear Regression**:
+   - **Performance**: *Train*: MAE = 0.592, RMSE=0.726, R² = 0.863  
+*Validation*: MAE = 0.0.629, RMSE=0.0.801, R² = 0.0.704
+2. **Decision Tree**
+   - Hyperparameter tuning via GridSearchCV
+   - Best params: `max_depth=5, min_samples_leaf=4, min_samples_split=2`
+   - **Performance**: *Train*: MAE = 0.433, RMSE = 0.540, R² = 0.823  
+   *Validation*: MAE = 0.839, RMSE = 0.999, R² = 0.540  (**OVERFITTING IN TRAINING SET**)
 
-### Advanced Models Tested
-
-1. **Random Forest** (selected model)
+3. **Random Forest** (*selected model*)
    - Hyperparameter tuning via GridSearchCV
    - Best params: `n_estimators=300, max_depth=15`
-   - **Performance**: MAE = 0.502, RMSE = 0.663, R² = 0.894
+   - **Performance**:*Train*: MAE = 0.236, RMSE = 0.289, R² = 0.949
+   *Validation*: MAE = 0.542, RMSE = 0.700, R² = 0.774  
+   *Test*: MAE = 0.475, RMSE = 0.607, R² = 0.794
 
-2. **XGBoost**
+4. **XGBoost**
    - Comparable performance with extensive regularization
-   - Performance: MAE = 0.510, RMSE = 0.672, R² = 0.891
 
 ### Model Selection Rationale
 
 **Random Forest was selected** for deployment based on:
 
-- Slightly better MAE (0.502 vs 0.510)
+- Slightly better MAE
 - Better interpretability through feature importance
 - Lower computational overhead for inference
 - Robust performance across different regions
-
-### Cross-Validation
-
-- 5-fold CV performed on 2021 training data
-- Validated on completely separate 2023 test set (temporal validation)
-
-### Feature Importance (Top 10)
-
-1. Government Effectiveness (0.145)
-2. Rule of Law (0.118)
-3. Control of Corruption (0.113)
-4. Political Stability (0.091)
-5. Regulatory Quality (0.089)
-6. Voice and Accountability (0.061)
-7. GDP per capita (0.060)
-8. Urban Population % (0.044)
-9. Life Expectancy (0.041)
-10. School Enrollment (0.036)
 
 ## Project Structure
 
@@ -125,6 +114,47 @@ crime-prediction/
 ├── test_predict.py               # Unit tests for predictions
 ├── Dockerfile                    # Docker configuration
 └── requirements.txt              # Python dependencies
+```
+
+``` bash
+├── countries_for_testing.txt
+├── Data
+│   ├── merged2021.csv
+│   ├── merged2023.csv
+│   ├── oc_2021.csv
+│   ├── oc_2023.csv
+│   ├── wdi_2021.csv
+│   ├── wdi_2023.csv
+│   ├── models
+│   │   ├── dict_vectorizer.pkl
+│   │   ├── RandomForest.pkl
+│   │   └── scaler.pkl
+├── Dockerfile
+├── graph.png
+├── img
+│   ├── criminality_score_analysis.png
+│   ├── feature_importance_rf.png
+│   ├── graph.png
+│   ├── linear_regression_performance.png
+│   ├── linear_regression_vs_baseline.png
+│   └── random_forest_vs_linear_regression.png
+├── Instructions.md
+├── notebook.ipynb
+├── pyproject.toml
+├── README.md
+├── requirements.txt
+├── scores_for_testing.txt
+├── src
+│   ├── config.py
+│   ├── data_preprocessing.py
+│   ├── evaluate_model.py
+│   ├── predict.py
+│   ├── serve.py
+│   └── train.py
+├── tests
+│   └── test_predict.py
+└── uv.lock
+
 ```
 
 ## Installation & Setup
