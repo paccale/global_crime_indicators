@@ -5,7 +5,6 @@ from pathlib import Path
 
 # Project Paths
 PROJECT_ROOT = Path(__file__).parent.parent
-print(PROJECT_ROOT)
 DATA_DIR = PROJECT_ROOT / "Data"
 MODEL_DIR = DATA_DIR / "models"
 

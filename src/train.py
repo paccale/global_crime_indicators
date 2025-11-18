@@ -26,7 +26,6 @@ def prepare_data():
     ### TRAINING DATA (2021 Dataset)
     df_wdi, df_oc = load_data(wdi_path=WDI_2021_PATH, oc_path=OC_2021_PATH, year_used=2021)
     oc_countries_set = set(df_oc['Country'].tolist())
-    print(oc_countries_set)
     df_wdi = align_wdi_countries_names(df_wdi,oc_countries_set=oc_countries_set)
     df_wdi = select_wdi_indicators(df_wdi_correct_countries=df_wdi, year_used=2021)
     df_wdi = add_continents_to_wdi(df_wdi_filtered=df_wdi, )
@@ -46,7 +45,6 @@ def prepare_data():
     ### TEST DATA (2023 DATASET)
     df_wdi, df_oc = load_data(wdi_path=WDI_2023_PATH, oc_path=OC_2023_PATH, year_used=2023)
     df_wdi = align_wdi_countries_names(df_wdi,oc_countries_set=oc_countries_set)
-    print(f'PASQUALE: {df_wdi.shape}')
     df_wdi = select_wdi_indicators(df_wdi_correct_countries=df_wdi, year_used=2023)
     df_wdi = add_continents_to_wdi(df_wdi_filtered=df_wdi, )
     df_wdi = handling_wdi_missing_values(df_wdi_with_continents=df_wdi, )
@@ -67,7 +65,6 @@ def prepare_data():
     
 def train_model(params = RF_PARAMS):
     X_train, y_train, X_test, y_test, dv, scaler = prepare_data()
-    print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
     rf_model = RandomForestRegressor(
         **params, 
         random_state=RANDOM_STATE,

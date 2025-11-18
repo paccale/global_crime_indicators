@@ -189,7 +189,7 @@ Place the following files in the `Data/` directory:
 4. **Train the model** (optional - pre-trained model included)
 
 ```bash
-python train.py
+python src/train.py
 ```
 
 This creates model artifacts in `Data/models/`:
