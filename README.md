@@ -24,7 +24,7 @@ The project combines two authoritative data sources:
 ### 2. World Development Indicators (WDI)
 
 - **Source**: [World Bank Open Data](https://databank.worldbank.org/)
-- **Download**: [WDI Database](https://www.kaggle.com/datasets/theworldbank/world-development-indicators?select=wdi-csv-zip-57-mb-)
+- **Download**: [WDI Database](https://www.kaggle.com/datasets/dataregina/world-development-indicators)
 - **Content**: 18 carefully selected socio-economic indicators:
   - **Economic**: GDP per capita, GDP growth, unemployment rates, inflation, trade
   - **Education**: Secondary school enrollment
@@ -39,6 +39,9 @@ I used the 2021 Dataset during the training phase (so for training and validatio
 - Testing: 193 countries (2023 data)
 - Features: 18 numerical + 1 categorical (continent)
 - No target leakage: predictions based solely on socio-economic factors
+
+**PLEASE NOTE** : The files oc_2021.csv, oc_2023.csv, wdi_2021.csv, wdi_2023.csv, merged2021.csv, and merged2023.csv are created in the first steps of the notebook.
+To run them, you need to enter the files ‘WDICSV.csv’ ([WDI Database](https://www.kaggle.com/datasets/dataregina/world-development-indicators) and 'global_oc_index.xlsx’ (https://ocindex.net/downloads) into ‘Data’ folder.
 
 ## Exploratory Data Analysis
 
@@ -117,42 +120,40 @@ crime-prediction/
 ```
 
 ``` bash
-├── countries_for_testing.txt
 ├── Data
-│   ├── merged2021.csv
-│   ├── merged2023.csv
-│   ├── oc_2021.csv
-│   ├── oc_2023.csv
-│   ├── wdi_2021.csv
-│   ├── wdi_2023.csv
+│   ├── merged2021.csv                                # datasets already merged for convenience if anyone wants to experiment
+│   ├── merged2023.csv                                # datasets already merged for convenience if anyone wants to experiment
+│   ├── oc_2021.csv                                 # Training: Crime scores (2021)
+│   ├── oc_2023.csv                                 # Testing: Crime scores (2023)
+│   ├── wdi_2021.csv                                  # Training: WDI indicators (2021)
+│   ├── wdi_2023.csv                                  # Testing: WDI indicators (2023)
 │   ├── models
-│   │   ├── dict_vectorizer.pkl
-│   │   ├── RandomForest.pkl
-│   │   └── scaler.pkl
+│   │   ├── dict_vectorizer.pkl                         # Feature vectorizer
+│   │   ├── RandomForest.pkl                        # Trained Model
+│   │   └── scaler.pkl                        # Feature Scaler
 ├── Dockerfile
-├── graph.png
-├── img
+├── img                                               # folder containing graphs created during the study phase
 │   ├── criminality_score_analysis.png
 │   ├── feature_importance_rf.png
 │   ├── graph.png
 │   ├── linear_regression_performance.png
 │   ├── linear_regression_vs_baseline.png
 │   └── random_forest_vs_linear_regression.png
-├── Instructions.md
-├── notebook.ipynb
+├── notebook.ipynb                                  # Complete EDA and modeling
 ├── pyproject.toml
 ├── README.md
 ├── requirements.txt
-├── scores_for_testing.txt
 ├── src
-│   ├── config.py
-│   ├── data_preprocessing.py
-│   ├── evaluate_model.py
-│   ├── predict.py
-│   ├── serve.py
-│   └── train.py
+│   ├── config.py                                   # Configuration and constants
+│   ├── data_preprocessing.py                       # Data pipeline functions
+│   ├── evaluate_model.py                           # Model evaluation utilities
+│   ├── predict.py                                  # Prediction module
+│   ├── serve.py                                    # Flask API 
+│   └── train.py                                    # Model training script
 ├── tests
-│   └── test_predict.py
+│   └── test_predict.py                               # script for local prediction testing
+│   └── scores_for_testing.txt                        # helper files for testing                             
+│   └── countries_for_testing.txt                     # helper files for testing
 └── uv.lock
 
 ```
