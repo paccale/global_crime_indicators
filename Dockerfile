@@ -4,7 +4,7 @@ WORKDIR /src
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY src/app.py .
+COPY src/serve.py .
 COPY src/predict.py .
 COPY src/config.py .
 COPY src/data_preprocessing.py .
@@ -16,4 +16,4 @@ COPY Data/models/scaler.pkl /Data/models
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["python", "serve.py"]
