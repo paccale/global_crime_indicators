@@ -254,7 +254,6 @@ The first contains all the features for each state, which you can copy into a cu
 
 You can also simply make the classic curl request that you can find in section API Usage of this readme
 
-
 ## Docker Deployment
 
 ### Build the Docker image
@@ -271,12 +270,24 @@ docker run -p 5000:5000 crime-prediction
 
 The API will be available at `http://localhost:5000`
 
+## AWS Cloud Deployment
+
+The service is also deployed on **AWS EC2** and publicly accessible for testing.  
+Simply perform the same tests, replacing localhost:5000 with the following public IP address`3.239.85.121:5000`
+
+Example: 
+
+```bash
+curl http://3.239.85.121:5000/ping 
+```
+
+
 ## API Usage
 
 ### 1. Health Check
 
 ```bash
-curl http://localhost:5000/ping
+curl http://localhost:5000/ping 
 ```
 
 **Response:**
@@ -514,6 +525,5 @@ This project is for educational purposes. Data sources (World Bank, Global Organ
 
 ---
 
-**Author**: Pasquale  
-**Project Year**: 2024  
-**Last Updated**: November 2024
+**Author**: Pasquale Candita
+**Project Year**: 2025  
